@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Happy Birthday Vanshika!</title>
+<style>
+  /* Reset & base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box; user-select:none;
+  }
+  body,html {
+    height: 100%;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #f9d5e5, #fad0c4);
+    overflow: hidden;
+    touch-action: manipulation;
+  }
+  #app {
+    width: 350px; max-width: 100vw;
+    height: 600px; max-height: 100vh;
+    margin: 5px auto;
+    background: #ffe7f0;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  button {
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    background: linear-gradient(45deg,#fa8f87,#fbbc81);
+    color: #350014;
+    box-shadow: 0 0 10px #fbbc81;
+    user-select:none;
+  }
+
+  /* Intro screen */
+  #introScreen {
+    position: absolute; top:0; left:0; width: 100%; height: 100%;
+    background: linear-gradient(to top right, #f9f1f7, #fcdeea);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 60px;
+    z-index: 10;
+  }
+  #teddySlide {
+    width: 150px; height: 150px;
+    background-image: url('https://i.postimg.cc/hjB0gphM/teddy-sit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    animation: slideIn 2s forwards;
+  }
+  #teddySlide.slip {
+    animation: slipDown 2s forwards;
+  }
+  #magicalPaper {
+    width: 220px; height: 140px;
+    background-image: url('https://i.postimg.cc/DZf3BjRH/magic-paper.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+    opacity: 0;
+    transform: scale(0.8);
+    cursor: pointer;
+    user-select:none;
+    filter: drop-shadow(0 5px 3px rgba(0,0,0,0.2));
+  }
+  #magicalPaper.show {
+    animation: paperAppear 1s forwards;
+  }
+
+  @keyframes slideIn {
+    0% { transform: translateY(-200px) translateX(0); }
+    50% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(0) translateX(10px); }
+  }
+  @keyframes slipDown {
+    0% { transform: translateY(0) rotate(0deg); }
+    40% { transform: translateY(30px) rotate(20deg); }
+    70% { transform: translateY(5px) rotate(-15deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+  @keyframes paperAppear {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Paper Opened Birthday Wish */
+  #birthdayWish {
+    position: absolute;
+    top: 20%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 280px; height: 260px;
+    background: radial-gradient(circle at center, #fff6fa 70%, #f6d7fb 100%);
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgb(255 192 203 / 0.7);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 20px 25px;
+    color: #871a63;
+    line-height: 1.5;
+    font-weight: 600;
+    cursor: grab;
+    user-select:none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 15;
+  }
+  #birthdayWish.show {
+    opacity: 1;
+  }
+  #birthdayWish h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: #c7247b;
+    text-shadow: 1px 1px 3px #ffc7db;
+  }
+  #birthdayWish p {
+    font-size: 1.1rem;
+  }
+  #birthdayWish .instruction {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    color: #a7479b;
+    font-style: italic;
+  }
+
+  /* Start party button */
+  #startPartyBtn {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    font-weight: 800;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #ff92c4, #ffa3c9);
+    box-shadow: 0 0 15px #ff62b6;
+    border-radius: 40px;
+    animation: glowBounce 2s ease-in-out infinite;
+    cursor: pointer;
+    user-select:none;
+    z-index: 20;
+  }
+  #startPartyBtn.show {
+    display: block;
+  }
+  @keyframes glowBounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+      box-shadow: 0 0 12px #ff62b6;
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px);
+      box-shadow: 0 0 25px #ff92c4;
+    }
+  }
+
+  /* Party Scene */
+  #partyScene {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to top, #aed9f7, #fef6ff);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 15px 12px 0 12px;
+    z-index: 5;
+  }
+  #partyScene.show {
+    display: flex;
+  }
+
+  /* Banner */
+  #banner {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #e91e63;
+    text-shadow: 1px 1px 8px #ffb6d3;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px dashed #e91e63;
+    letter-spacing: 2px;
+  }
+
+  /* Image slots as hanging decorations */
+  #imageSlots {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .imageSlot {
+    width: 55px; height: 55px;
+    border: 2px dashed #ee5599;
+    border-radius: 10px;
+    background-color: #ffd1ea;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .imageSlot:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 8px #f98fc1;
+  }
+  .imageSlot input {
+    display: none;
+  }
+  .imageSlot label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(255 182 193 / 0.7);
+    font-size: 10px;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    padding: 2px 0;
+    color: #5a0a44;
+    user-select:none;
+  }
+
+  /* Teddy girl princess */
+  #teddyGirl {
+    flex: 0 0 auto;
+    width: 140px; height: 180px;
+    margin: 0 auto 6px auto;
+    background-image: url('https://i.postimg.cc/XJ2qyR1d/teddy-princess.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.15));
+    cursor: pointer;
+    user-select:none;
+    transition: transform 0.3s ease;
+  }
+  #teddyGirl.animateWave {
+    animation: wave 3s ease-in-out 1;
+  }
+  @keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+  }
+
+  /* Teddy doctors */
+  #teddyDoctors {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .doctorTeddy {
+    width: 60px; height: 80px;
+    background-image: url('https://i.postimg.cc/KY2K3XbW/teddy-doctor.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+    animation: idleBob 3s ease-in-out infinite;
+    user-select:none;
+    cursor: pointer;
+  }
+  .doctorTeddy:nth-child(odd) {
+    animation-delay: 0s;
+  }
+  .doctorTeddy:nth-child(even) {
+    animation-delay: 1.5s;
+  }
+  @keyframes idleBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Teddy with cake */
+  #cakeTeddy {
+    width: 100px; height: 150px;
+    margin: 0 auto;
+    background-image: url('https://i.postimg.cc/L8ypx5CW/teddy-walking-cake.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
+    user-select:none;
+    animation: cakeWalk 5s forwards;
+  }
+  @keyframes cakeWalk {
+    0% { transform: translateX(-400px) scale(1); }
+    60% { transform: translateX(calc(50vw - 175px)) scale(1.1); }
+    100% { transform: translateX(calc(50vw - 150px)) scale(1); }
+  }
+
+  /* Cake and candles */
+  #cake {
+    position: relative;
+    width: 160px; height: 120px;
+    margin: 10px auto 20px auto;
+    background-image: url('https://i.postimg.cc/Qt8wDZPn/birthday-cake-base.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    user-select:none;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2));
+  }
+  .candle {
+    position: absolute;
+    width: 10px; height: 25px;
+    background: #fbb8b8;
+    border-radius: 15% 15% 35% 35%;
+    top: 15px;
+    box-shadow: inset 0 0 4px #cc5757;
+  }
+  .candle:nth-child(1) { left: 30px; }
+  .candle:nth-child(2) { left: 60px; }
+  .candle:nth-child(3) { left: 90px; }
+  .candle:nth-child(4) { left: 120px; }
+  .flame {
+    position: absolute;
+    top: -18px; left: 1px;
+    width: 6px; height: 15px;
+    background: radial-gradient(circle at center, #fff200 15%, #ff9400);
+    border-radius: 50% 50% 0 0;
+    opacity: 0;
+    animation: flameFlicker 2s infinite;
+  }
+  .flame.active {
+    opacity: 1;
+  }
+  @keyframes flameFlicker {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.9); opacity: 0.8; }
+  }
+
+  /* Cake slicing */
+  #cakeSlices {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .slice {
+    width: 30px; height: 50px;
+    background-image: url('https://i.postimg.cc/g0ZbBpLc/cake-slice.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    user-select:none;
+    cursor: default;
+    opacity: 0;
+    transform-origin: bottom center;
+    transform: scale(0.3);
+    transition: all 0.7s ease;
+  }
+  .slice.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Clapping teddy animation */
+  .clapping {
+    animation: clap 1.6s infinite ease-in-out;
+  }
+  @keyframes clap {
+    0%, 100% { transform: translateX(0) rotate(0deg) scale(1); }
+    50% { transform: translateX(3px) rotate(14deg) scale(1.05); }
+  }
+
+  /* Dancing teddy animation */
+  .dancing {
+    animation: dance 1.5s ease-in-out infinite;
+  }
+  @keyframes dance {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(8deg); }
+  }
+
+  /* Fireworks */
+  #fireworksCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Balloons */
+  .balloon {
+    position: absolute;
+    width: 40px; height: 60px;
+    border-radius: 60% 60% 60% 60% / 75% 75% 25% 25%;
+    background: linear-gradient(45deg, #f06292, #f8bbd0);
+    box-shadow: inset -6px -8px 8px rgba(255 255 255 / 0.4);
+    filter: drop-shadow(0 3px 3px #bb6189);
+    animation-name: floatUp;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    user-select:none;
+  }
+  .balloon.red { background: linear-gradient(45deg,#f44336,#e57373);}
+  .balloon.pink { background: linear-gradient(45deg, #e91e63,#f06292);}
+  .balloon.purple { background: linear-gradient(45deg,#9c27b0,#ba68c8);}
+  @keyframes floatUp {
+    0% { transform: translateY(600px) translateX(0) rotate(0deg); opacity: 1;}
+    100% { transform: translateY(-100px) translateX(30px) rotate(15deg); opacity: 0;}
+  }
+
+  /* Confetti */
+  #confettiCanvas {
+    position: absolute;
+    pointer-events: none;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    z-index: 4;
+  }
+</style>
+</head>
+<body>
+<div id="app" role="main" aria-label="Happy Birthday Vanshika Bhagat birthday website">
+  <section id="introScreen" aria-label="Intro animation screen" tabindex="0">
+    <div id="teddySlide" aria-hidden="true"></div>
+    <div id="magicalPaper" role="button" aria-label="Click to open magical birthday wish" tabindex="0"></div>
+  </section>
+
+  <section id="birthdayWish" tabindex="0" aria-label="Birthday wish card" role="dialog" aria-modal="true" aria-labelledby="wishHeading" aria-describedby="wishMessage">
+    <h2 id="wishHeading">Happy Birthday Vanshika Bhagat! 🎉🎂</h2>
+    <p id="wishMessage">Wishing you a day filled with love, laughter, and all the magic that your heart can hold. Have a fabulous birthday full of joy!</p>
+    <p class="instruction">Swipe or drag this card away to start the party.</p>
+  </section>
+
+  <button id="startPartyBtn" aria-label="Start the party button">Start the Party!</button>
+
+  <section id="partyScene" aria-live="polite" aria-label="Party celebration scene" tabindex="0">
+    <div id="banner" aria-label="Happy Birthday Banner">Happy Birthday Vanshika</div>
+    <div id="imageSlots" aria-label="Birthday pictures gallery">
+      <!-- These image slots can be replaced by user uploads -->
+    </div>
+    <div id="teddyGirl" role="img" aria-label="Teddy girl princess"></div>
+    <div id="teddyDoctors" aria-label="Team of teddy doctor friends" role="group">
+      <!-- Doctors go here -->
+    </div>
+    <div id="cakeTeddy" aria-label="Teddy carrying birthday cake"></div>
+    <div id="cake" aria-label="Birthday cake with candles">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+    <div id="cakeSlices" aria-label="Cake slices"></div>
+  </section>
+
+  <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+</div>
+
+<audio id="birthdaySong" src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_1150111c20.mp3?filename=happy-birthday-1316.mp3" loop preload="auto"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+// Helper: Create balloon elements floating up
+function createBalloons(count = 10) {
+  const colors = ['red', 'pink', 'purple'];
+  for (let i = 0; i < count; i++) {
+    const balloon = document.createElement('div');
+    balloon.classList.add('balloon', colors[i % colors.length]);
+    balloon.style.left = `${Math.random() * 90 + 5}%`;
+    balloon.style.animationDuration = `${8 + Math.random() * 6}s`;
+    balloon.style.animationDelay = `${Math.random() * 10}s`;
+    document.getElementById('app').appendChild(balloon);
+  }
+}
+
+// Create image slots for photos
+function createImageSlots() {
+  const container = document.getElementById('imageSlots');
+  for(let i=0; i<12; i++) {
+    let slot = document.createElement('div');
+    slot.className = 'imageSlot';
+    slot.style.backgroundImage = `url('https://i.postimg.cc/Nf7wmLKP/placeholder-img.png')`;
+    slot.title = `Birthday picture slot ${i+1} - click to upload image`;
+    slot.setAttribute('tabindex', '0');
+    // Hidden file input for image replacement
+    let fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.id = `fileInput${i}`;
+    let label = document.createElement('label');
+    label.setAttribute('for', `fileInput${i}`);
+    label.textContent = 'Upload';
+
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          slot.style.backgroundImage = `url('${ev.target.result}')`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    slot.appendChild(fileInput);
+    slot.appendChild(label);
+    slot.addEventListener('click', () => fileInput.click());
+    slot.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        fileInput.click();
+        e.preventDefault();
+      }
+    });
+
+    container.appendChild(slot);
+  }
+}
+
+// Animate teddy girl waving
+function teddyGirlWave() {
+  const tg = document.getElementById('teddyGirl');
+  tg.classList.add('animateWave');
+  setTimeout(()=>tg.classList.remove('animateWave'), 3000);
+}
+
+// Animate teddy doctors clapping and dancing
+function teddyDoctorsActions() {
+  const doctors = document.querySelectorAll('.doctorTeddy');
+  doctors.forEach((doctor, idx) => {
+    setTimeout(() => doctor.classList.add('clapping'), idx * 300);
+    setTimeout(() => doctor.classList.remove('clapping'), 3000 + idx*300);
+    setTimeout(() => doctor.classList.add('dancing'), 3500 + idx*300);
+    setTimeout(() => doctor.classList.remove('dancing'), 7000 + idx*300);
+  });
+}
+
+// Add doctor teddies
+function addDoctorTeddies() {
+  const container = document.getElementById('teddyDoctors');
+  for(let i=0; i<4; i++) {
+    let teddy = document.createElement('div');
+    teddy.className = 'doctorTeddy';
+    teddy.setAttribute('title', 'Teddy doctor friend - click me!');
+    teddy.setAttribute('tabindex', '0');
+    teddy.addEventListener('click', () => {
+      teddy.classList.add('dancing');
+      setTimeout(() => teddy.classList.remove('dancing'), 3000);
+    });
+    teddy.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        teddy.click();
+        e.preventDefault();
+      }
+    });
+    container.appendChild(teddy);
+  }
+}
+
+// Fireworks canvas setup and animation
+function setupFireworks() {
+  const canvas = document.getElementById('fireworksCanvas');
+  const ctx = canvas.getContext('2d');
+  let cw, ch;
+  function resize() {
+    cw = canvas.width = canvas.clientWidth;
+    ch = canvas.height = canvas.clientHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let fireworks = [];
+  let particles = [];
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  class Firework {
+    constructor(sx, sy, tx, ty) {
+      this.x = sx;
+      this.y = sy;
+      this.sx = sx;
+      this.sy = sy;
+      this.tx = tx;
+      this.ty = ty;
+      this.dist = distance(sx, sy, tx, ty);
+      this.progress = 0;
+      this.speed = 5;
+      this.angle = Math.atan2(ty - sy, tx - sx);
+      this.trail = [];
+    }
+    update() {
+      this.progress += this.speed / this.dist;
+      if(this.progress >= 1) {
+        createParticles(this.tx, this.ty);
+        return true; // exploded
+      }
+      this.x = this.sx + this.progress * (this.tx - this.sx);
+      this.y = this.sy + this.progress * (this.ty - this.sy);
+      this.trail.push({x: this.x, y: this.y});
+      if(this.trail.length > 5) this.trail.shift();
+      return false;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.strokeStyle = 'white';
+      for(let i=0; i<this.trail.length-1; i++) {
+        ctx.moveTo(this.trail[i].x, this.trail[i].y);
+        ctx.lineTo(this.trail[i+1].x, this.trail[i+1].y);
+      }
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.fillStyle = 'white';
+      ctx.arc(this.x,this.y,3,0,Math.PI*2);
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  class Particle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.speed = random(2,5);
+      this.angle = random(0, Math.PI * 2);
+      this.radius = 2;
+      this.life = 0;
+      this.maxLife = random(20, 40);
+      this.color = `hsl(${Math.floor(random(0,360))},100%,70%)`;
+    }
+    update() {
+      this.x += Math.cos(this.angle) * this.speed;
+      this.y += Math.sin(this.angle) * this.speed;
+      this.speed *= 0.9;
+      this.life++;
+      this.radius *= 0.96;
+      return this.life >= this.maxLife || this.radius <= 0.1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  function distance(x1, y1, x2, y2) {
+    return Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+  }
+
+  function createParticles(x,y) {
+    for(let i=0; i<30; i++) {
+      particles.push(new Particle(x,y));
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0,0,cw,ch);
+
+    if(Math.random() < 0.04) {
+      const sx = cw/2;
+      const sy = ch;
+      const tx = Math.random() * cw;
+      const ty = Math.random() * (ch/2);
+      fireworks.push(new Firework(sx,sy,tx,ty));
+    }
+
+    for(let i = fireworks.length-1; i>=0; i--) {
+      const fw = fireworks[i];
+      if(fw.update()) {
+        fireworks.splice(i,1);
+      }
+      fw.draw();
+    }
+
+    for(let j=particles.length-1; j>=0; j--) {
+      const p = particles[j];
+      if(p.update()) {
+        particles.splice(j,1);
+      } else {
+        p.draw();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+// Confetti
+function setupConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  function resize() {
+    w = canvas.width = canvas.clientWidth;
+    h = canvas.height = canvas.clientHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const confettiPieces = [];
+  const colors = ['#e91e63', '#fb8da2', '#f48fb1', '#f06292'];
+
+  class ConfettiPiece {
+    constructor() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h - h;
+      this.size = 6 + Math.random() * 6;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.speed = 1 + Math.random() * 2;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = (Math.random() - 0.5) * 10;
+      this.opacity = 1;
+      this.wind = (Math.random() - 0.5) * 0.2;
+    }
+    update() {
+      this.y += this.speed;
+      this.x += this.wind;
+      this.rotation += this.rotationSpeed;
+      if(this.y > h) {
+        this.x = Math.random() * w;
+        this.y = -this.size;
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation * Math.PI/180);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+      ctx.restore();
+    }
+  }
+
+  for(let i=0; i<70; i++) confettiPieces.push(new ConfettiPiece());
+
+  function loop() {
+    ctx.clearRect(0, 0, w, h);
+    confettiPieces.forEach(piece => {
+      piece.update();
+      piece.draw();
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+// Candle light up animation
+function lightCandles() {
+  const flames = document.querySelectorAll('.flame');
+  flames.forEach(flame => {
+    flame.classList.add('active');
+  });
+}
+
+// Teddy girl blows candles animation + cake slice distribution
+function teddyBlowsCandles() {
+  const cake = document.getElementById('cake');
+  const slicesContainer = document.getElementById('cakeSlices');
+  const slicesCount = 6;
+  // Clear old slices
+  slicesContainer.innerHTML = '';
+  // Blowing simulation (scale cake)
+  gsap.to(cake, {duration: 1.2, scale: 0.9, ease: "power1.inOut", repeat: 1, yoyo: true, onComplete: () => {
+    // Show cake slices following blow
+    for(let i=0; i<slicesCount; i++) {
+      const slice = document.createElement('div');
+      slice.className = 'slice';
+      slicesContainer.appendChild(slice);
+      gsap.to(slice, {duration: 0.8, opacity: 1, scale: 1, delay: 0.3 + i*0.15, ease:"back.out(2)"});
+    }
+    distributeSlices();
+  }});
+}
+
+// Distribute slices to teddy doctors and teddy girl, with clapping and dancing
+function distributeSlices() {
+  const doctors = document.querySelectorAll('.doctorTeddy');
+  const teddyGirl = document.getElementById('teddyGirl');
+  let delay = 0;
+  // Give slice to teddy girl
+  gsap.to(teddyGirl, {duration: 0.7, x: 20, y: -10, rotation: 15, yoyo: true, repeat: 1, delay});
+  delay += 0.7;
+  doctors.forEach((doctor, idx) => {
+    setTimeout(() => {
+      doctor.classList.add('clapping');
+      gsap.to(doctor, {duration: 0.7, x: 20, y: -10, rotation: 15, yoyo: true, repeat: 1});
+      setTimeout(() => {
+        doctor.classList.remove('clapping');
+        doctor.classList.add('dancing');
+      }, 1500);
+    }, delay * 1000 + idx * 500);
+  });
+}
+
+// Main animation sequence control
+function startIntroAnimation() {
+  const teddy = document.getElementById('teddySlide');
+  const paper = document.getElementById('magicalPaper');
+  const wish = document.getElementById('birthdayWish');
+
+  // Teddy slides in then slips
+  setTimeout(() => {
+    teddy.classList.add('slip');
+    setTimeout(() => {
+      paper.classList.add('show');
+      paper.focus();
+    }, 2300);
+  }, 1000);
+
+  // Click or Enter key on magical paper opens wish
+  paper.addEventListener('click', openWish);
+  paper.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      openWish();
+      e.preventDefault();
+    }
+  });
+
+  function openWish() {
+    teddy.style.display = 'none';
+    paper.style.display = 'none';
+    wish.classList.add('show');
+    wish.focus();
+    // Add drag to wish card to close functionality 
+    let posX = 0;
+    let posY = 0;
+    let dragging = false;
+    wish.style.cursor = 'grab';
+
+    function pointerDown(e) {
+      dragging = true;
+      posX = e.clientX || e.touches[0].clientX;
+      posY = e.clientY || e.touches[0].clientY;
+      wish.style.cursor = 'grabbing';
+    }
+    function pointerMove(e) {
+      if(!dragging) return;
+      let dx = (e.clientX || e.touches[0].clientX) - posX;
+      let dy = (e.clientY || e.touches[0].clientY) - posY;
+      wish.style.transform = `translate(${dx}px, ${dy}px) scale(0.7) rotate(${dx*0.1}deg)`;
+      if(dy < -80) closeWish();
+    }
+    function pointerUp(e) {
+      dragging = false;
+      wish.style.cursor = 'grab';
+      wish.style.transform = 'translate(0px, 0px) scale(0.8) rotate(0deg)';
+    }
+    function closeWish() {
+      wish.classList.remove('show');
+      document.getElementById('startPartyBtn').classList.add('show');
+      document.getElementById('startPartyBtn').focus();
+    }
+
+    wish.addEventListener('pointerdown', pointerDown);
+    window.addEventListener('pointermove', pointerMove);
+    window.addEventListener('pointerup', pointerUp);
+  }
+}
+
+// Start party button click handler
+function startParty() {
+  const startBtn = document.getElementById('startPartyBtn');
+  const introScreen = document.getElementById('introScreen');
+  const partyScene = document.getElementById('partyScene');
+  const cakeTeddy = document.getElementById('cakeTeddy');
+  const birthdaySong = document.getElementById('birthdaySong');
+
+  startBtn.style.display = 'none';
+  partyScene.classList.add('show');
+  introScreen.style.display = 'none';
+
+  turtleAnimationsAndParty();
+
+  function turtleAnimationsAndParty() {
+    lightCandles();
+
+    // Teddy girl waving periodically
+    setInterval(teddyGirlWave, 8000);
+    teddyGirlWave();
+
+    // Add teddy doctors' clapping/dancing
+    addDoctorTeddies();
+    setInterval(teddyDoctorsActions, 7000);
+    teddyDoctorsActions();
+
+    createImageSlots();
+    createBalloons();
+
+    setupFireworks();
+    setupConfetti();
+
+    birthdaySong.play();
+
+    // Cake teddy walk animation done, then blow candles and slice cake
+    gsap.to(cakeTeddy, {duration: 5, x: 180, ease: 'power2.out', onComplete: () => {
+      teddyBlowsCandles();
+    }});
+  }
+}
+
+// Keyboard shortcut enter on start party button
+document.getElementById('startPartyBtn').addEventListener('keydown', e => {
+  if(e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    startParty();
+  }
+});
+
+// Click handler
+document.getElementById('startPartyBtn').addEventListener('click', startParty);
+
+// Start intro animation on load
+window.onload = startIntroAnimation;
+</script>
+</body>
+</html>
+

@@ -1,0 +1,189 @@
+/* style.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(#ffecd2, #fcb69f);
+  }
+  
+  .scene {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Teddy Slip Animation */
+  .teddy-slip {
+    width: 150px;
+    height: 150px;
+    background: url('images/teddy_cutout.png') no-repeat center/contain;
+    position: absolute;
+    top: -200px;
+    animation: slipIn 3s ease-in-out forwards;
+  }
+  
+  @keyframes slipIn {
+    0% { top: -200px; transform: rotate(0); }
+    50% { top: 100px; transform: rotate(45deg); }
+    70% { top: 300px; transform: rotate(-30deg); }
+    100% { top: 400px; transform: rotate(0); }
+  }
+  
+  .wish-note {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 10;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Wish Paper Popup */
+  #wishPaper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
+    padding: 20px;
+    animation: unfold 2s ease forwards;
+  }
+  
+  @keyframes unfold {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  
+  #startPartyBtn {
+    margin-top: 20px;
+    background: #ff69b4;
+    border: none;
+    padding: 10px 25px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+  }
+  
+  #startPartyBtn:hover {
+    background: #ff1493;
+  }
+  
+  /* Party Scene */
+  .party-scene {
+    background: url('images/party_bg.png') no-repeat center/cover;
+    animation: fadeIn 2s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  #birthdayTable {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    margin-top: 30px;
+  }
+  
+  .teddy-girl, .teddy-doctor, .cake {
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: popIn 1s ease forwards;
+  }
+  
+  .teddy-girl {
+    background-image: url('images/teddy_girl.png');
+  }
+  
+  .teddy-doctor {
+    background-image: url('images/teddy_doctor1.png');
+  }
+  
+  .cake {
+    background-image: url('images/cake.png');
+    animation: candleGlow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes candleGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+  }
+  
+  /* Heart Gift Animation */
+  .heart-popup {
+    position: absolute;
+    bottom: 100px;
+    animation: floatHeart 4s ease-in-out infinite;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  
+  @keyframes floatHeart {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  #giftMessage {
+    background: #fff3cd;
+    padding: 30px;
+    border-radius: 15px;
+    font-size: 22px;
+    border: 2px dashed #ff69b4;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: none;
+    margin-top: 20px;
+    animation: popGift 1s ease forwards;
+  }
+  
+  @keyframes popGift {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Ending Scene */
+  .ending-scene {
+    background: #000;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+  }
+  
